@@ -29,6 +29,8 @@ class KategoriController extends Controller
     public function create()
     {
         //
+        $pagename = 'Form Input Kategori';
+        return view('admin.kategori.create', compact('pagename'));
     }
 
     /**
@@ -40,6 +42,18 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nama_kategori' => 'required',
+            'status_kategori' => 'required'
+        ]);
+
+        $data_tugas = new kategori([
+            'nama_kategori' => $request->get('nama_kategori'),
+            'status_kategori' => $request->get('status_kategori')
+        ]);
+
+        $data_tugas->save();
+        return redirect('admin/kategori')->with(['status' => 'Data Berhasil Disimpan']);
     }
 
     /**
@@ -62,6 +76,9 @@ class KategoriController extends Controller
     public function edit($id)
     {
         //
+        $pagename = 'Edit Kategori';
+        $data = kategori::findOrFail($id);
+        return view('admin.kategori.edit', compact('data', 'pagename'));
     }
 
     /**
@@ -74,6 +91,19 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'nama_kategori' => 'required',
+            'status_kategori' => 'required'
+        ]);
+
+        $data_kategori = kategori::findOrFail($id);
+
+        $data_kategori->nama_kategori = $request->get('nama_kategori');
+        $data_kategori->status_kategori = $request->get('status_kategori');
+        
+
+        $data_kategori->update();
+        return redirect('admin/kategori')->with(['status' => 'Data Berhasil Diubah']);
     }
 
     /**
@@ -85,5 +115,7 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         //
+        kategori::destroy($id);
+        return redirect('admin/kategori')->with(['delete' => 'Data Berhasil Dihapus']);
     }
 }

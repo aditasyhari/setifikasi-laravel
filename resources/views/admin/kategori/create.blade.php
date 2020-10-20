@@ -34,61 +34,48 @@
                         <strong>{{ $pagename }}</strong>
                     </div>
                     <div class="card-body card-block">
-
-                        <form action="{{ route('tugas.update', $data->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            @method('PATCH')
+                        <form action="{{ route('kategori.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                             @csrf
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="nama_tugas" placeholder="Text" class="form-control" value="{{ $data->nama_tugas }}"></div>
-                            </div>
-                          
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="kategori_tugas" id="select" class="form-control">
-
-                                        @foreach($data_kategori as $kategori)
-                                            <option value="{{ $kategori->id }}"
-                                                @if($kategori->id == $data->id)
-                                                    selected
-                                                @endif
-                                            >
-                                            {{ $kategori->nama_kategori }}</option>
-                                        @endforeach
-                                        
-                                    </select>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="nama_kategori" placeholder="Text" value="{{ old('nama_kategori') }}" class="form-control @error('nama_kategori') is-invalid @enderror">
+                                @error('nama_kategori')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 </div>
+                                
                             </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Keterangan</label></div>
-                                <div class="col-12 col-md-9"><textarea name="ket_tugas" id="textarea-input" rows="9" placeholder="Text..." class="form-control">{{ $data->ket_tugas }}</textarea></div>
-                            </div>
-                              
-                            <div class="row form-group">
+                            
+                            <div class="row form-group {{ $errors->has('status_kategori') ? ' has-error' : '' }}">
                                 <div class="col col-md-3"><label class=" form-control-label">Status</label></div>
                                 <div class="col col-md-9">
                                     <div class="form-check">
                                         <div class="radio">
                                             <label for="radio1" class="form-check-label ">
-                                                <input type="radio" id="radio1" name="status_tugas" value="0"  class="form-check-input" {{ $data->status_tugas == 0?'checked':'' }}>Belum Selesai
+                                                <input type="radio" id="radio1" name="status_kategori" value="0" class="form-check-input">Non Aktif
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label for="radio2" class="form-check-label ">
-                                                <input type="radio" id="radio2" name="status_tugas" value="1" class="form-check-input" {{ $data->status_tugas == 1?'checked':'' }}>Selesai
+                                                <input type="radio" id="radio2" name="status_kategori" value="1" class="form-check-input">Aktif
                                             </label>
                                         </div>
-                                        
+                                        @if ($errors->has('status_kategori'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('status_kategori') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Update
+                                    <i class="fa fa-dot-circle-o"></i> Simpan
                                 </button>
-                                <a href="{{ url()->previous() }}" class="btn btn-danger btn-sm">
+                                <a class="btn btn-danger btn-sm" href="{{ url()->previous() }}">
                                     <i class="fa fa-ban"></i> Cancel
                                 </a>
                             </div>

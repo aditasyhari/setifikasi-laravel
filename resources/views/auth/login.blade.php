@@ -53,6 +53,11 @@
 
 		<form class="form form--login" method="POST" action="{{ route('login') }}">
 			@csrf
+			@if ($message = Session::get('registered'))
+				<h5 class="alert alert-success alert-block mb-5">
+					{{ $message }}
+				</h5>
+			@endif
 			<h1 class="form__title">Sign in</h1>
 
 			<div class="form__helper">

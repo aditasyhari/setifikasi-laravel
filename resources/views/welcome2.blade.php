@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sertifikasi</title>
 
+    <link rel="shortcut icon" href="{{ asset('public/img/bnsp2.jpg') }}" type="image/x-icon">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="{{ asset('public/admin/vendors/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- <link rel="stylesheet" href="{{ asset('public/css/welcome.css') }}"> -->
 
     <style>
@@ -69,7 +72,7 @@
             height: 100%;
             z-index: 1;
             background: rgba(0, 0, 0, 0.6);
-            box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000;
+            box-shadow: inset 120px 100px 250px black, inset -120px -100px 250px black;
         }
 
         .showcase-top {
@@ -88,7 +91,7 @@
             margin-left: 0;
         }
 
-        .showcase-top a {
+        .showcase-top #login, .showcase-top #dropdownMenuButton {
             position: absolute;
             top: 50%;
             right: 0;
@@ -142,6 +145,7 @@
 
         .btn:hover {
             opacity: 0.9;
+            color: white;
         }
 
         .btn-rounded {
@@ -237,7 +241,24 @@
     <section class="showcase">
         <div class="showcase-top">
             <img src="{{ asset('public/img/logo-poliwangi.png') }}" alt="" />
-            <a href="{{ route('login') }}" class="btn btn-rounded">Sign In</a>
+            @if (Route::has('login'))
+                @auth
+                    <div data-toggle="dropdown" id="dropdownMenuButton" class="btn btn-rounded">  
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-haspopup="true" aria-expanded="false">
+                        <!-- <a class="dropdown-item" href="#">{{Session::get('name')}}</a>  -->
+                        <a class="dropdown-item" href="{{ url('/admin') }}">Dashboard</a> 
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" id="login" class="btn btn-rounded">Sign In</a>
+                @endauth
+            @endif
         </div>
         <div class="showcase-content">
             <img src="{{ asset('public/img/bnsp.jpg') }}" alt="">
@@ -249,6 +270,10 @@
             </a>
         </div>
     </section>
+
+    <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/admin/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('public/admin/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 </body>
 </html>

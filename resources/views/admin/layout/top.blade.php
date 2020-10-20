@@ -1,11 +1,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sufee Admin - HTML5 Admin Template</title>
+<title>Dashboard</title>
 <meta name="description" content="Sufee Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="apple-icon.png">
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="{{ asset('public/img/bnsp2.jpg') }}" type="image/x-icon">
 
 <link rel="stylesheet" href="{{ asset('public/admin/vendors/bootstrap/dist/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/admin/vendors/font-awesome/css/font-awesome.min.css') }}">

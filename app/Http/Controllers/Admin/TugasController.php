@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Task;
 use App\kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TugasController extends Controller
 {
@@ -18,7 +19,13 @@ class TugasController extends Controller
     {
         //
         $pagename = 'Data Tugas';
-        $data = Task::all();
+        // $data = Task::all();
+        $data = DB::table('tasks')
+                    ->join('kategoris', 'tasks.id_kategori', '=', 'kategoris.id')
+                    ->select('tasks.id','tasks.nama_tugas','tasks.ket_tugas','tasks.status_tugas','kategoris.nama_kategori')
+                    ->get();
+
+        // dd($data);
         return view('admin.tugas.index', compact('data','pagename'));
     }
 

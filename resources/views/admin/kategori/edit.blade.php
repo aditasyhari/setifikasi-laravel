@@ -35,34 +35,12 @@
                     </div>
                     <div class="card-body card-block">
 
-                        <form action="{{ route('tugas.update', $data->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="{{ route('kategori.update', $data->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                             @method('PATCH')
                             @csrf
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="nama_tugas" placeholder="Text" class="form-control" value="{{ $data->nama_tugas }}"></div>
-                            </div>
-                          
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="kategori_tugas" id="select" class="form-control">
-
-                                        @foreach($data_kategori as $kategori)
-                                            <option value="{{ $kategori->id }}"
-                                                @if($kategori->id == $data->id)
-                                                    selected
-                                                @endif
-                                            >
-                                            {{ $kategori->nama_kategori }}</option>
-                                        @endforeach
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Keterangan</label></div>
-                                <div class="col-12 col-md-9"><textarea name="ket_tugas" id="textarea-input" rows="9" placeholder="Text..." class="form-control">{{ $data->ket_tugas }}</textarea></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="nama_kategori" placeholder="Text" class="form-control" value="{{ $data->nama_kategori }}"></div>
                             </div>
                               
                             <div class="row form-group">
@@ -71,12 +49,12 @@
                                     <div class="form-check">
                                         <div class="radio">
                                             <label for="radio1" class="form-check-label ">
-                                                <input type="radio" id="radio1" name="status_tugas" value="0"  class="form-check-input" {{ $data->status_tugas == 0?'checked':'' }}>Belum Selesai
+                                                <input type="radio" id="radio1" name="status_kategori" value="0"  class="form-check-input" {{ $data->status_kategori == 0?'checked':'' }}>Non Aktif
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label for="radio2" class="form-check-label ">
-                                                <input type="radio" id="radio2" name="status_tugas" value="1" class="form-check-input" {{ $data->status_tugas == 1?'checked':'' }}>Selesai
+                                                <input type="radio" id="radio2" name="status_kategori" value="1" class="form-check-input" {{ $data->status_kategori == 1?'checked':'' }}>Aktif
                                             </label>
                                         </div>
                                         

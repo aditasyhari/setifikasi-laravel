@@ -36,13 +36,25 @@
                             <div class="card-header">
                                 <strong class="card-title">{{ $pagename }}</strong>
                             </div>
+                            @if ($message = Session::get('status'))
+                            <div class="alert alert-success alert-block">
+                                {{ $message }}
+                            </div>
+                            @endif
+                            @if ($message = Session::get('delete'))
+                            <div class="alert alert-danger alert-block">
+                                {{ $message }}
+                            </div>
+                            @endif
                             <div class="card-body">
+                            <a href="{{ url('admin/kategori/create') }}" class="btn btn-primary mb-3">Tambah</a>
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>Status</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,10 +63,22 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $row->nama_kategori }}</td>
                                             @if($row->status_kategori == 0)
-                                                <td>Non Aktif</td>
+                                                <td><i class="fa fa-circle text-danger"></i> Non Aktif</td>
                                             @else
-                                                <td>Aktif</td>
+                                                <td><i class="fa fa-circle text-success"></i> Aktif</td>
                                             @endif
+                                            <td>
+                                                <div class="text-center" style="font-size: 20px;">
+                                                    <a href="{{ route('kategori.edit', $row->id) }}" class="mx-1 badge badge-warning">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form action="{{ route('kategori.destroy', $row->id) }}" method="post" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                        <button type="submit" onclick="return confirm('Are you sure to delete?')" class="text-danger" style="cursor: pointer;"><i class="fa fa-trash-o"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

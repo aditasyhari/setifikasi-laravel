@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
+    <link rel="shortcut icon" href="{{ asset('public/img/bnsp2.jpg') }}" type="image/x-icon">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
