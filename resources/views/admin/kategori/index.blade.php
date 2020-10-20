@@ -47,7 +47,7 @@
                             </div>
                             @endif
                             <div class="card-body">
-                            <a href="{{ url('admin/kategori/create') }}" class="btn btn-primary mb-3">Tambah</a>
+                            <a href="{{ url('admin/kategori/create') }}" class="btn btn-primary mb-3 pull-right">Tambah</a>
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
